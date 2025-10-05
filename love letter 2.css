@@ -3,17 +3,16 @@
 html, body {
   margin: 0;
   height: 100%;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(#f6f1fb,#f0e6f6);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
 }
 
 .envlope-wrapper {
-  width: 100%;
-  max-width: 700px; /* envelope container max width */
-  height: 80vh;      /* responsive height */
+  width: 700px;
+  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,28 +30,29 @@ html, body {
   overflow: hidden;
 }
 
-.front { position: absolute; width: 0; height: 0; z-index: 3; pointer-events: none; }
-
 .flap {
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  position: absolute;
+  top: -50px;
+  left: 0; right: 0; margin: 0 auto;
+  width: 0;
+  height: 0;
   border-left: 50% solid transparent;
   border-right: 50% solid transparent;
-  border-bottom: 15%;
-  border-top: 18% solid #d9534f;
+  border-top: 80px solid #d9534f;
+  z-index: 3;
   transform-origin: top;
-  z-index: 6;
 }
 
 .pocket {
   position: absolute;
-  top: 17%;
+  top: 50px;
   left: 0; right: 0; margin: 0 auto;
+  width: 0;
+  height: 0;
   border-left: 50% solid #f5a3a2;
   border-right: 50% solid #f5a3a2;
-  border-bottom: 27%;
-  border-top: 27% solid transparent;
+  border-bottom: 200px solid #ff6f61;
+  border-top: 200px solid transparent;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   z-index: 2;
@@ -60,53 +60,26 @@ html, body {
 
 .letter {
   position: absolute;
-  left: 5%;
-  width: 90%;
-  top: 20%;
-  bottom: 10%;
+  top: 60px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
   background: linear-gradient(#ffffff,#fffef6);
   border-radius: 12px;
   padding: 16px;
   box-sizing: border-box;
   box-shadow: 0 6px 28px rgba(0,0,0,0.12);
   font-family: 'Dancing Script', cursive;
-  font-size: 18px;
-  line-height: 1.45;
+  font-size: 16px;
+  line-height: 1.5;
   color: #222;
   overflow-y: auto;
   z-index: 4;
 }
 
-.words { margin: 8px 0; }
-.words.line1 { font-size: 16px; color: #7a2b2b; font-weight: 500; }
-.words.line2 { font-size: 24px; font-weight: 700; }
+.words {
+  margin: 8px 0;
+}
+.words.line1 { font-size: 16px; color: #7a2b2b; }
+.words.line2 { font-size: 22px; font-weight: bold; }
 .words.line3, .words.line23, .words.line24 { text-align: center; }
-
-.open .flap { transform: rotateX(180deg); transition: transform 0.5s ease; z-index:1; }
-.close .flap { transform: rotateX(0deg); transition: transform 0.5s 0.5s ease; z-index:6; }
-.open .letter { transform: translateY(-25%); transition: transform 0.5s 0.5s ease; z-index:2; }
-.close .letter { transform: translateY(0); transition: transform 0.5s ease; z-index:4; }
-
-.hearts { position: absolute; top: 20%; left:0; right:0; z-index:1; pointer-events:none; }
-.heart { position: absolute; width: 28px; height: 28px; bottom:0; }
-.heart:before, .heart:after { position:absolute; content:""; left:8px; top:0; width:12px; height:20px; background:#e60073; border-radius:12px 12px 0 0; }
-.heart:after { left:0; transform:rotate(45deg); }
-.heart:before { transform:rotate(-45deg); }
-.close .heart { opacity:0; animation:none; }
-.a1 { left:16%; transform:scale(0.6); animation: slideUp 4s linear 1, sway 2s ease-in-out 4 alternate; animation-fill-mode:forwards; animation-delay:0.7s; }
-.a2 { left:52%; transform:scale(1); animation: slideUp 5s linear 1, sway 4s ease-in-out 2 alternate; animation-fill-mode:forwards; animation-delay:0.7s; }
-.a3 { left:80%; transform:scale(0.9); animation: slideUp 7s linear 1, sway 2s ease-in-out 6 alternate; animation-fill-mode:forwards; animation-delay:0.7s; }
-
-@keyframes slideUp { 0% { transform:translateY(0); opacity:1; } 100% { transform:translateY(-100%); opacity:0; } }
-@keyframes sway { 0% { margin-left:0; } 100% { margin-left:36px; } }
-
-.reset { position: fixed; bottom: 20px; left:50%; transform:translateX(-50%); }
-.reset button { font-weight:700; background:transparent; border:2px solid #d9534f; color:#d9534f; padding:10px 14px; border-radius:6px; cursor:pointer; min-width:120px; margin:5px; }
-.reset button:hover { background:#d9534f; color:#fff; }
-
-@media(max-width:700px){
-  #envelope { width:90%; height:auto; }
-  .letter { height:60vh; font-size:16px; padding:12px; }
-  .heart { width:18px; height:18px; }
-  .heart:before, .heart:after { width:8px; height:12px; left:4px; top:0; border-radius:8px 8px 0 0; }
-  }
