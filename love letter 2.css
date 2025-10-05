@@ -3,15 +3,15 @@
   position: relative;
   width: 340px;
   height: 220px;
+  margin: 100px auto 0;
+  background-color: #d9534f; /* Warm romantic red */
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  margin: 80px auto 0;
-  background-color: #d9534f; /* Warm romantic red */
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
-  overflow: visible;
+  overflow: hidden; /* keeps letter inside */
 }
 
-/* Common front pieces (flap + pocket) */
+/* Envelope front pieces */
 .front {
   position: absolute;
   width: 0;
@@ -28,76 +28,69 @@
   border-left: 170px solid transparent;
   border-right: 170px solid transparent;
   border-bottom: 92px solid transparent;
-  border-top: 110px solid #d9534f; /* Same romantic red */
+  border-top: 100px solid #d9534f; /* Same romantic red */
   transform-origin: top;
   pointer-events: none;
 }
 
-/* Pocket */
+/* Pocket (bottom front part) */
 .pocket {
   left: 0;
   right: 0;
   margin: 0 auto;
-  border-left: 170px solid #f5a3a2; /* Soft pinkish red for the pocket */
+  position: absolute;
+  top: 60px;
+  border-left: 170px solid #f5a3a2; /* Soft pinkish red */
   border-right: 170px solid #f5a3a2;
   border-bottom: 98px solid #ff6f61; /* Lighter romantic red */
   border-top: 98px solid transparent;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  top: 62px;
-  position: absolute;
   z-index: 2;
 }
 
-/* Letter card inside envelope - flexible to many lines and scrolls if needed */
+/* The letter inside the envelope */
 .letter {
   position: absolute;
   left: 6%;
+  top: 20%;
   width: 88%;
-  height: 74%;
-  top: 18%;
+  height: 60%;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
   font-family: "Dancing Script", cursive;
   box-sizing: border-box;
-  padding: 18px 16px;
+  padding: 14px;
+  overflow-y: auto;
   z-index: 4;
-  overflow-y: auto; /* allow scrolling when many lines */
-  -webkit-overflow-scrolling: touch;
   transition: transform 0.4s ease, z-index 0.6s;
 }
 
-/* Remove the previous absolute-positioning model for words and make them normal flow lines */
+/* Individual text lines */
 .words {
   display: block;
   width: 100%;
-  background-color: transparent; /* keep letter background clean */
   color: #2b2b2b;
-  line-height: 1.35;
+  line-height: 1.4;
   margin: 6px 0;
-  font-size: 1.05rem;
-  white-space: normal;
+  background-color: transparent;
   word-wrap: break-word;
+  font-size: 1rem;
 }
 
-/* Small "To:" style */
 .words.line1 {
   font-size: 0.85rem;
-  width: auto;
-  text-align: left;
-  margin-bottom: 10px;
   color: #7a2b2b;
-}
-
-/* Salutation slightly larger and centered */
-.words.line2 {
-  font-size: 1.25rem;
-  text-align: left;
   margin-bottom: 8px;
 }
 
-/* Slight variations for emphasis on later lines - keep them readable and stylish */
+.words.line2 {
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+/* All later lines have a consistent look */
 .words.line3,
 .words.line4,
 .words.line5,
@@ -120,12 +113,11 @@
 .words.line22,
 .words.line23,
 .words.line24 {
-  font-size: 1.05rem;
-  text-align: left;
+  font-size: 1rem;
   margin: 4px 0;
 }
 
-/* When envelope opens/closes - keep existing behavior but adjusted z-index/transforms to match new sizes */
+/* Envelope animation states */
 .open .flap {
   transform: rotateX(180deg);
   transition: transform 0.45s ease, z-index 0.6s;
@@ -139,7 +131,7 @@
 }
 
 .close .letter {
-  transform: translateY(0px);
+  transform: translateY(0);
   transition: transform 0.4s ease, z-index 1s;
   z-index: 4;
 }
@@ -150,10 +142,10 @@
   z-index: 2;
 }
 
-/* Hearts / floating shapes */
+/* Floating hearts animation */
 .hearts {
   position: absolute;
-  top: calc(18% + 8px);
+  top: calc(20% + 10px);
   left: 0;
   right: 0;
   height: 0;
@@ -169,7 +161,6 @@
   height: 28px;
 }
 
-/* make a neat heart shape using pseudo elements and smaller, centered values */
 .heart:before,
 .heart:after {
   position: absolute;
@@ -178,11 +169,10 @@
   top: 0;
   width: 12px;
   height: 20px;
-  background: #e60073; /* Deep romantic pink */
+  background: #e60073;
   border-radius: 12px 12px 0 0;
   transform: rotate(-45deg);
   transform-origin: 0 100%;
-  pointer-events: none;
 }
 
 .heart:after {
@@ -191,40 +181,62 @@
   transform-origin: 100% 100%;
 }
 
-/* Hide hearts when closed; animate when open */
 .close .heart {
   opacity: 0;
   animation: none;
 }
 
-.a1 { left: 18%; transform: scale(0.6); opacity: 1; animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate; animation-fill-mode: forwards; animation-delay: 0.7s; }
-.a2 { left: 52%; transform: scale(1); opacity: 1; animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate; animation-fill-mode: forwards; animation-delay: 0.7s; }
-.a3 { left: 78%; transform: scale(0.8); opacity: 1; animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate; animation-fill-mode: forwards; animation-delay: 0.7s; }
+.a1 {
+  left: 18%;
+  transform: scale(0.6);
+  opacity: 1;
+  animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+  animation-fill-mode: forwards;
+  animation-delay: 0.7s;
+}
 
+.a2 {
+  left: 52%;
+  transform: scale(1);
+  opacity: 1;
+  animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+  animation-fill-mode: forwards;
+  animation-delay: 0.7s;
+}
+
+.a3 {
+  left: 78%;
+  transform: scale(0.8);
+  opacity: 1;
+  animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+  animation-fill-mode: forwards;
+  animation-delay: 0.7s;
+}
+
+/* Heart animations */
 @keyframes slideUp {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-380px); opacity: 0; }
 }
+
 @keyframes sideSway {
   0% { margin-left: 0px; }
   100% { margin-left: 36px; }
 }
 
-/* Page background and envelope wrapper sizing */
+/* Page style */
 body {
-  background-color: #f0e6f6; /* Soft lavender for a romantic, dreamy feel */
+  background-color: #f0e6f6; /* Soft lavender */
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: #222;
 }
 
 .envlope-wrapper {
-  height: 460px; /* increased to allow the letter translate when opening */
+  height: 460px;
 }
 
-/* Reset button area */
+/* Reset buttons */
 .reset {
   text-align: center;
   margin-top: 18px;
@@ -233,17 +245,14 @@ body {
 .reset button {
   font-weight: 800;
   transition: all 0.12s linear;
-  -webkit-appearance: none;
   background-color: transparent;
   border: solid 2px #d9534f;
   border-radius: 4px;
   color: #d9534f;
-  display: inline-block;
   font-size: 14px;
   text-transform: uppercase;
   margin: 6px;
   padding: 10px 14px;
-  line-height: 1em;
   cursor: pointer;
   min-width: 120px;
 }
@@ -251,10 +260,4 @@ body {
 .reset button:hover {
   background-color: #d9534f;
   color: #fff;
-}
-
-/* Small accessibility improvements */
-.letter:focus {
-  outline: 3px dashed rgba(217,83,79,0.15);
-  outline-offset: 3px;
 }
