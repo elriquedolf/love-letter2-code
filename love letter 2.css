@@ -1,192 +1,94 @@
-/* Replace these rules to make the letter bigger and stop overlap/bleed */
-.letter {
-  position: absolute;
-  left: 4%;
-  width: 92%;
-  top: 10%;
-  height: 80%;                 /* increased height so the paper is much larger */
-  background: linear-gradient(#ffffff,#fffef6);
-  border-radius: 48px;
-  padding: 120px 120px;        /* bigger padding for large layout */
-  box-sizing: border-box;
-  box-shadow: 0 24px 112px rgba(0,0,0,0.12);
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#f6f1fb,#f0e6f6);
   font-family: 'Dancing Script', cursive;
-  color: #222;
-  font-size: 20px;             /* slightly smaller to avoid wrapping issues */
-  line-height: 1.8;            /* increased line-height to prevent overlap */
-  z-index: 4;
-  overflow-y: auto;            /* scroll when text exceeds letter height */
-  -webkit-overflow-scrolling: touch;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure individual paragraphs never overlap and wrap cleanly */
-.words {
-  display: block;
-  margin: 18px 0;              /* more vertical spacing between lines */
-  padding: 0;
-  background: transparent;
-  word-wrap: break-word;
-  word-break: break-word;
-  white-space: normal;
-  text-align: left;
-  line-height: 1.8;            /* matching line-height for safety */
+/* Envelope */
+#envelope {
+  position: relative;
+  width: 90vw;
+  max-width: 900px;
+  height: 70vh;
+  max-height: 700px;
+  background-color: #d9534f;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
 }
 
-/* Slightly reduce sizes for headings to give more room */
-.words.line1 { font-size: 18px; color: #7a2b2b; margin-bottom: 20px; }
-.words.line2 { font-size: 40px; font-weight: 700; margin-bottom: 16px; }
-
-/* Keep main body readable but spaced out */
-.words.line3,
-.words.line4,
-.words.line5,
-.words.line6,
-.words.line7,
-.words.line8,
-.words.line9,
-.words.line10,
-.words.line11,
-.words.line12,
-.words.line13,
-.words.line14,
-.words.line15,
-.words.line16,
-.words.line17,
-.words.line18,
-.words.line19,
-.words.line20,
-.words.line21,
-.words.line22,
-.words.line23,
-.words.line24 {
-  font-size: 20px;
-  margin: 14px 0;
-}
-
-/* When the envelope opens, lift the letter up more so text remains visible inside */
-.open .letter {
-  transform: translateY(-900px); /* pulled up further to reveal more of the tall letter */
-  transition: transform 0.6s 0.5s ease;
-}
-
-/* closed state remains anchored */
-.close .letter {
-  transform: translateY(0);
-  transition: transform 0.5s ease;
-}.words.line1 { font-size: 18px; color: #7a2b2b; margin-bottom: 18px; }
-
-/* salutation */
-.words.line2 { font-size: 48px; font-weight: 700; margin-bottom: 12px; }
-
-/* main body lines */
-.words.line3, .words.line4, .words.line5, .words.line6, .words.line7, .words.line8,
-.words.line9, .words.line10, .words.line11, .words.line12, .words.line13, .words.line14,
-.words.line15, .words.line16, .words.line17, .words.line18, .words.line19, .words.line20,
-.words.line21, .words.line22, .words.line23, .words.line24 {
-  font-size: 22px;
-  margin: 10px 0;
-}
-
-/* center a few special lines for a nice layout */
-.words.line3, .words.line23, .words.line24 { text-align: center; }
-
-/* envelope open/close behavior — adjusted translate for tall envelope */
-.open .flap {
-  transform: rotateX(180deg);
-  transition: transform 0.6s ease;
-  z-index: 1;
-}
-
-.close .flap {
-  transform: rotateX(0deg);
-  transition: transform 0.6s 0.6s ease;
+/* Flap & pocket */
+.front { position: absolute; width: 0; height: 0; z-index: 3; }
+.flap {
+  left: 0; right: 0; margin: 0 auto;
+  border-left: 450px solid transparent;
+  border-right: 450px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-top: 250px solid #d9534f;
+  transform-origin: top;
   z-index: 6;
 }
-
-/* letter movement when opening (moved up enough for large envelope) */
-.close .letter {
-  transform: translateY(0);
-  transition: transform 0.5s ease;
+.pocket {
+  position: absolute; top: 130px; left: 0; right: 0; margin: auto;
+  border-left: 450px solid #f5a3a2;
+  border-right: 450px solid #f5a3a2;
+  border-bottom: 400px solid #ff6f61;
+  border-top: 250px solid transparent;
+  border-radius: 0 0 16px 16px;
+  z-index: 2;
 }
 
-.open .letter {
-  transform: translateY(-520px); /* pulled up to show more of the letter inside large envelope */
-  transition: transform 0.6s 0.5s ease;
-}
-
-/* Hearts — scaled up so they remain visible in bigger layout */
-.hearts {
+/* Letter */
+.letter {
   position: absolute;
-  top: calc(20% + 80px);
-  left: 0;
-  right: 0;
-  z-index: 1;
-  pointer-events: none;
+  top: 10%; left: 5%; width: 90%; height: 80%;
+  background: linear-gradient(#fff,#fffef6);
+  border-radius: 8px;
+  padding: 40px;
+  box-sizing: border-box;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+  color: #222;
+  font-size: 20px;
+  line-height: 1.6;
+  overflow-y: auto;
+  z-index: 4;
 }
 
+/* Lines */
+.words { margin: 12px 0; }
+.words.line1 { font-size: 18px; color: #7a2b2b; }
+.words.line2 { font-size: 28px; font-weight: 700; }
+.words.line23, .words.line24 { text-align: center; }
+
+/* Open/close */
+.open .flap { transform: rotateX(180deg); transition: transform 0.6s ease; }
+.close .flap { transform: rotateX(0deg); transition: transform 0.6s ease; }
+.close .letter { transform: translateY(0); transition: transform 0.5s ease; }
+.open .letter { transform: translateY(-180px); transition: transform 0.6s 0.4s ease; }
+
+/* Hearts */
+.hearts { position: absolute; top: 20%; left: 0; right: 0; pointer-events: none; }
 .heart {
-  position: absolute;
-  width: 224px;  /* 28 * 8 */
-  height: 224px;
-  bottom: 0;
+  position: absolute; width: 30px; height: 30px;
 }
-
-.heart:before,
-.heart:after {
-  position: absolute;
-  content: "";
-  left: 64px;   /* 8 * 8 */
-  top: 0;
-  width: 96px;  /* 12 * 8 */
-  height: 160px; /* 20 * 8 */
-  background: #e60073;
-  border-radius: 96px 96px 0 0;
+.heart:before, .heart:after {
+  content: ''; position: absolute; top: 0; left: 8px;
+  width: 12px; height: 20px; background: #e60073;
+  border-radius: 12px 12px 0 0;
 }
+.heart:after { left: 0; transform: rotate(45deg); }
+.heart:before { transform: rotate(-45deg); }
 
-.heart:after { left: 0; transform: rotate(45deg); transform-origin: 100% 100%; }
-.heart:before { transform: rotate(-45deg); transform-origin: 0 100%; }
-
-/* hide hearts when closed */
-.close .heart { opacity: 0; animation: none; }
-
-/* position floating hearts proportionally */
-.a1 { left: 16%; transform: scale(0.6); animation: slideUp 4s linear 1, sway 2s ease-in-out 4 alternate; animation-fill-mode:forwards; animation-delay:0.7s; }
-.a2 { left: 52%; transform: scale(1); animation: slideUp 5s linear 1, sway 4s ease-in-out 2 alternate; animation-fill-mode:forwards; animation-delay:0.7s; }
-.a3 { left: 80%; transform: scale(0.9); animation: slideUp 7s linear 1, sway 2s ease-in-out 6 alternate; animation-fill-mode:forwards; animation-delay:0.7s; }
-
-@keyframes slideUp {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-1520px); opacity: 0; } /* 1900-ish upward motion for large layout */
+/* Controls */
+.reset { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); text-align: center; }
+.reset button {
+  background: transparent; border: 2px solid #d9534f; color: #d9534f;
+  padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;
 }
-
-@keyframes sway {
-  0% { margin-left: 0; }
-  100% { margin-left: 288px; } /* a proportional horizontal sway */
-}
-
-/* wrapper and controls styling */
-.envlope-wrapper { width: 100%; height: 100%; display:flex; align-items:center; justify-content:center; pointer-events: none; }
-.reset { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); text-align: center; pointer-events: auto; }
-.reset button { font-weight:700; background:transparent; border:2px solid #d9534f; color:#d9534f; padding:18px 20px; border-radius:12px; cursor:pointer; min-width:160px; margin: 8px; }
-.reset button:hover { background:#d9534f; color:#fff; }
-
-/* accessibility focus */
-.letter:focus { outline: 12px dashed rgba(217,83,79,0.12); outline-offset: 24px; }
-
-/* responsive fallback: if viewport smaller than envelope, allow scaling down for usability */
-@media (max-width: 3200px) {
-  /* scale the envelope to fit */
-  #envelope { transform: scale(0.9); transform-origin: center; }
-}
-@media (max-width: 2000px) {
-  #envelope { transform: scale(0.7); }
-}
-@media (max-width: 1400px) {
-  #envelope { transform: scale(0.45); }
-  .letter { font-size: 16px; padding: 28px; border-radius: 18px; }
-  .words.line2 { font-size: 28px; }
-  .heart { width: 64px; height: 64px; }
-  .heart:before, .heart:after { width: 18px; height: 28px; left: 8px; top: 0; border-radius: 18px 18px 0 0; }
-}
-
+.reset button:hover { background: #d9534f; color: #fff; }
