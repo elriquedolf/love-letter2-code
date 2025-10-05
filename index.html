@@ -1,60 +1,85 @@
-<!DOCTYPE html><html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Love letter for Princess</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="love letter 2.css" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-  </head>
-  <body>
-    <div class="envlope-wrapper">
-      <div id="envelope" class="close" aria-live="polite">
-        <div class="front flap" aria-hidden="true"></div>
-        <div class="front pocket" aria-hidden="true"></div><!-- Letter: use semantic paragraphs instead of absolutely positioned .words -->
-    <article class="letter" role="document" aria-label="Love letter">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Letter for Princess</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0; height: 100%; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(#f6f1fb,#f0e6f6); font-family: system-ui, sans-serif;
+}
+#envelope {
+  position: relative; width: 700px; height: 500px; background: #d9534f;
+  border-radius: 10px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.front { position: absolute; width: 0; height: 0; z-index: 3; pointer-events: none; }
+.flap {
+  left: 0; right: 0; margin: 0 auto; border-left: 350px solid transparent;
+  border-right: 350px solid transparent; border-bottom: 150px solid transparent;
+  border-top: 180px solid #d9534f; transform-origin: top; transition: transform 0.4s ease;
+  z-index: 6;
+}
+.pocket {
+  left: 0; right: 0; margin: 0 auto; position: absolute; top: 120px;
+  border-left: 350px solid #f5a3a2; border-right: 350px solid #f5a3a2;
+  border-bottom: 180px solid #ff6f61; border-top: 180px solid transparent;
+  border-radius: 0 0 10px 10px; z-index: 2;
+}
+.letter {
+  position: absolute; left: 5%; top: 25%; width: 90%; height: 70%;
+  background: linear-gradient(#fff,#fffef6); border-radius: 10px;
+  padding: 20px; box-sizing: border-box; font-family: 'Dancing Script', cursive;
+  font-size: 18px; line-height: 1.4; overflow-y: auto; z-index: 4;
+}
+.words { margin: 8px 0; }
+.words.line1 { font-size: 14px; color:#7a2b2b; }
+.words.line2 { font-size: 22px; font-weight:700; text-align:center; }
+.words.line3, .words.line4, .words.line5 { font-size: 18px; text-align:left; }
+.open .flap { transform: rotateX(180deg); z-index:1; }
+.open .letter { transform: translateY(-120px); transition: transform 0.4s ease; z-index:2; }
+.hearts { position:absolute; top:140px; left:0; right:0; z-index:1; pointer-events:none; }
+.heart { position:absolute; width:28px; height:28px; bottom:0; }
+.heart:before, .heart:after { content:""; position:absolute; width:12px; height:20px; background:#e60073; border-radius:12px 12px 0 0; top:0; }
+.heart:after { left:0; transform: rotate(45deg); transform-origin:100% 100%; }
+.heart:before { left:8px; transform: rotate(-45deg); transform-origin:0 100%; }
+.close .heart { opacity:0; }
+.a1 { left:16%; animation:slideUp 4s linear 1 forwards; }
+.a2 { left:52%; animation:slideUp 5s linear 1 forwards; }
+.a3 { left:80%; animation:slideUp 6s linear 1 forwards; }
+@keyframes slideUp { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(-200px); opacity:0; } }
+.reset { text-align:center; margin-top:16px; }
+.reset button { font-weight:700; background:transparent; border:2px solid #d9534f; color:#d9534f; padding:10px 14px; border-radius:6px; cursor:pointer; min-width:120px; margin:4px; }
+.reset button:hover { background:#d9534f; color:#fff; }
+</style>
+</head>
+<body>
+<div class="envlope-wrapper">
+  <div id="envelope" class="close">
+    <div class="front flap"></div>
+    <div class="front pocket"></div>
+    <article class="letter">
       <p class="words line1">To: Princess</p>
       <p class="words line2">My dearest Princess,</p>
-      <p class="words line3">You are the softest hello in a noisy world and the sharpest eye-roll when I act foolish;</p>
-      <p class="words line4">the way you laugh like sunlight spilling across an Aegean morning makes every ordinary day feel like a holiday.</p>
-      <p class="words line5">I love the way your hair catches the light and the way your stubborn little grin announces you won the argument before it even started.</p>
-      <p class="words line6">You are fierce in the best way — a tiny Greek hurricane with a heart made of honey and ancient sea‑salt.</p>
-      <p class="words line7">Sometimes you are playful and a little mean in the sweetest way, and honestly I love you more for it.</p>
-      <p class="words line8">You tease me like a practiced poet and correct me like a gentle teacher, and both make me want to be better.</p>
-      <p class="words line9">Your kindness is quiet but vast, like a harbor that always welcomes me home no matter how lost I feel.</p>
-      <p class="words line10">You worry too much about small things and laugh too loudly at the big ones, and both of those things are infuriatingly adorable.</p>
-      <p class="words line11">I love your hands — the ones that hold my phone when I'm distracted, that make soup when I'm tired, that tug me back when I wander.</p>
-      <p class="words line12">You are sweetness wrapped in sharpness: baklava and lemon peel, syrup and spice, calm sea and quick storm.</p>
-      <p class="words line13">I love that you are proud of where you come from, that your stories carry islands and olive trees and stubborn family love.</p>
-      <p class="words line14">And I love teasing you about how fiercely you protect your secrets — you hide smiles like treasures and roll your eyes like punctuation.</p>
-      <p class="words line15">Sometimes I call you my little tyrant of charm and you frown, and that frown becomes the thing I memorize like a blessing.</p>
-      <p class="words line16">When you speak in Greek words that I do not fully understand, I still hear home — a language that wraps me up and makes me braver.</p>
-      <p class="words line17">You make ordinary plans into myths I want to live inside forever, and even your smallest wishes feel like instructions for how to be better.</p>
-      <p class="words line18">Thank you for being stubborn enough to argue with me and kind enough to forgive me when I lose.</p>
-      <p class="words line19">Thank you for being my soft place to land and my loud reason to laugh, for being myth and mischief and so much mercy.</p>
-      <p class="words line20">I promise to love you through the silly, the sharp, the dramatic, and the quiet, to learn your rhythms and keep catching you when you jump.</p>
-      <p class="words line21">Because you are worth every brave thing I might do and every foolish arrow I might follow.</p>
-      <p class="words line22">So stay stubborn, stay sweet, stay gloriously, maddeningly, beautifully Greek — and stay mine, Princess.</p>
-      <p class="words line23">With all my ridiculous heart,</p>
-      <p class="words line24">— Elrique</p>
+      <p class="words line3">You are the sun in my mornings and the star in my nights.</p>
+      <p class="words line4">Your laughter lights up my heart and your stubbornness makes me smile.</p>
+      <p class="words line5">Forever yours, — Elrique</p>
     </article>
-
-    <div class="hearts" aria-hidden="true">
+    <div class="hearts">
       <div class="heart a1"></div>
       <div class="heart a2"></div>
       <div class="heart a3"></div>
     </div>
   </div>
 </div>
-
 <div class="reset">
-  <button id="open" type="button" aria-controls="envelope">Open</button>
-  <button id="reset" type="button" aria-controls="envelope">Close</button>
+  <button id="open">Open</button>
+  <button id="reset">Close</button>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="love letter 2.js"></script>
-
-  </body>
+<script>
+$('#open').click(()=>$('#envelope').addClass('open').removeClass('close'));
+$('#reset').click(()=>$('#envelope').addClass('close').removeClass('open'));
+</script>
+</body>
 </html>
