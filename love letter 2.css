@@ -1,85 +1,90 @@
+/* Handwritten, elegant love letter */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
 html, body {
-  margin: 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0; height: 100%;
+  display: flex; align-items: center; justify-content: center;
   background: linear-gradient(#f6f1fb,#f0e6f6);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-}
-
-.envlope-wrapper {
-  width: 700px;
-  height: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  font-family: system-ui, sans-serif;
 }
 
 #envelope {
   position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #d9534f;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+  width: 700px; height: 500px;
+  background: #d9534f;
+  border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
+.front { position: absolute; width: 0; height: 0; z-index: 3; pointer-events: none; }
+
+/* Flap */
 .flap {
-  position: absolute;
-  top: -50px;
   left: 0; right: 0; margin: 0 auto;
-  width: 0;
-  height: 0;
-  border-left: 50% solid transparent;
-  border-right: 50% solid transparent;
-  border-top: 80px solid #d9534f;
-  z-index: 3;
+  border-left: 350px solid transparent;
+  border-right: 350px solid transparent;
+  border-bottom: 150px solid transparent;
+  border-top: 180px solid #d9534f;
   transform-origin: top;
+  transition: transform 0.4s ease;
+  z-index: 6;
 }
 
+/* Pocket */
 .pocket {
-  position: absolute;
-  top: 50px;
   left: 0; right: 0; margin: 0 auto;
-  width: 0;
-  height: 0;
-  border-left: 50% solid #f5a3a2;
-  border-right: 50% solid #f5a3a2;
-  border-bottom: 200px solid #ff6f61;
-  border-top: 200px solid transparent;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  position: absolute; top: 120px;
+  border-left: 350px solid #f5a3a2;
+  border-right: 350px solid #f5a3a2;
+  border-bottom: 180px solid #ff6f61;
+  border-top: 180px solid transparent;
+  border-radius: 0 0 10px 10px;
   z-index: 2;
 }
 
+/* Letter */
 .letter {
   position: absolute;
-  top: 60px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  background: linear-gradient(#ffffff,#fffef6);
-  border-radius: 12px;
-  padding: 16px;
-  box-sizing: border-box;
-  box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+  left: 5%; top: 25%;
+  width: 90%; height: 70%;
+  background: linear-gradient(#fff,#fffef6);
+  border-radius: 10px;
+  padding: 20px; box-sizing: border-box;
   font-family: 'Dancing Script', cursive;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #222;
-  overflow-y: auto;
-  z-index: 4;
+  font-size: 18px; line-height: 1.4;
+  overflow-y: auto; z-index: 4;
 }
 
-.words {
-  margin: 8px 0;
+/* Text lines */
+.words { margin: 8px 0; }
+.words.line1 { font-size: 14px; color:#7a2b2b; }
+.words.line2 { font-size: 22px; font-weight:700; text-align:center; }
+.words.line3, .words.line4, .words.line5 { font-size: 18px; text-align:left; }
+
+/* Open/close behavior */
+.open .flap { transform: rotateX(180deg); z-index:1; }
+.open .letter { transform: translateY(-120px); transition: transform 0.4s ease; z-index:2; }
+
+/* Hearts */
+.hearts { position:absolute; top:140px; left:0; right:0; z-index:1; pointer-events:none; }
+.heart { position:absolute; width:28px; height:28px; bottom:0; }
+.heart:before, .heart:after {
+  content:""; position:absolute; width:12px; height:20px; background:#e60073; border-radius:12px 12px 0 0; top:0;
 }
-.words.line1 { font-size: 16px; color: #7a2b2b; }
-.words.line2 { font-size: 22px; font-weight: bold; }
-.words.line3, .words.line23, .words.line24 { text-align: center; }
+.heart:after { left:0; transform: rotate(45deg); transform-origin:100% 100%; }
+.heart:before { left:8px; transform: rotate(-45deg); transform-origin:0 100%; }
+.close .heart { opacity:0; }
+.a1 { left:16%; animation:slideUp 4s linear 1 forwards; }
+.a2 { left:52%; animation:slideUp 5s linear 1 forwards; }
+.a3 { left:80%; animation:slideUp 6s linear 1 forwards; }
+
+@keyframes slideUp { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(-200px); opacity:0; } }
+
+/* Buttons */
+.reset { text-align:center; margin-top:16px; }
+.reset button {
+  font-weight:700; background:transparent; border:2px solid #d9534f;
+  color:#d9534f; padding:10px 14px; border-radius:6px; cursor:pointer; min-width:120px; margin:4px;
+}
+.reset button:hover { background:#d9534f; color:#fff; }
